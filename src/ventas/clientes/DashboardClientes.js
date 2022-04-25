@@ -1,13 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getClientes } from './ClientesService';
 
 export default function DashboardClientes() {
-  return (
-    <div className="container">
-        <h1>Clientes</h1>
-        <Link to="/ventas/crear-cliente">
-            <button>Nuevo Cliente</button>
-        </Link>
-    </div>
-  )
+
+    const [clientes, setClientes] = useState([]);
+
+    useEffect(() => {
+        setClientes(getClientes());
+    }, [clientes])
+
+    return (
+        <div className="container">
+            <h1>Clientes</h1>
+            <Link to="/ventas/crear-cliente">
+                <button>Nuevo Cliente</button>
+            </Link>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {clientes.map(cliente => {
+                        return (
+                            <tr key={cliente.cif}>
+                                <td>{cliente.nombre}</td>
+                                <td></td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
+    )
 }
