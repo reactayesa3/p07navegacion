@@ -9,6 +9,10 @@ export function getClientes() {
     return clientes;
 }
 
+export function getClienteByCif(cif) {
+    return clientes.filter(cliente => cliente.cif === cif)[0];
+}
+
 export function addCliente(cliente) {
     clientes.push(cliente);
 }

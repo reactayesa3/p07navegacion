@@ -28,7 +28,11 @@ export default function DashboardClientes() {
                         return (
                             <tr key={cliente.cif}>
                                 <td>{cliente.nombre}</td>
-                                <td></td>
+                                <td>
+                                    <Link to={`/ventas/editar-cliente/${cliente.cif}`}>
+                                        Visualizar
+                                    </Link>
+                                </td>
                             </tr>
                         )
                     })}

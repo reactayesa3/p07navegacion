@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Outlet, Route, Routes } from 'react-router-dom'
 import CrearCliente from './clientes/CrearCliente'
 import DashboardClientes from './clientes/DashboardClientes'
+import EditarCliente from './clientes/EditarCliente'
 
 export default function InicioVentas() {
   return (
@@ -10,6 +11,7 @@ export default function InicioVentas() {
         <Route index element={<InicioVentasLayout />}/>
         <Route path="dashboard-clientes" element={<DashboardClientes />} />
         <Route path="crear-cliente" element={<CrearCliente />} />
+        <Route path="editar-cliente/:cif" element={<EditarCliente />}/>
      </Routes>
   )
 }
