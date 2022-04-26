@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
+import ProtectVentasRoute from "./guards/ProtectVentasRoute";
 import Inicio from "./pages/Inicio";
 import Soporte from "./pages/Soporte";
 
@@ -22,9 +23,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Inicio />}/>
         <Route path="/ventas/*" element={
-          <React.Suspense fallback={<p style={{textAlign: 'center'}}>Cargando...</p>}>
-            <InicioVentas />
-          </React.Suspense>
+          <ProtectVentasRoute>
+            <React.Suspense fallback={<p style={{textAlign: 'center'}}>Cargando...</p>}>
+              <InicioVentas />
+            </React.Suspense>
+          </ProtectVentasRoute>
         } />
         <Route path="/recursos-humanos/*" element={
           <React.Suspense fallback={<p style={{textAlign: 'center'}}>Cargando...</p>}>
