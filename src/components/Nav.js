@@ -1,10 +1,27 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { logout, selectUser } from '../store/stateSlice'
 
 export default function Nav() {
+
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+    }
+
   return (
     <nav>
-        <div>App</div>
+        <div>
+            {user.name !== '' ? 
+                <>
+                    <button onClick={handleLogout}>Cerrar sesión</button> {user.name }
+                </>
+                : 
+                <h1>App</h1>}
+        </div>
         <div>
             <NavLink to="/" className={({isActive}) => isActive ? 'activo' : ''}>
                 Inicio

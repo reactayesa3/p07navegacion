@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { appStateAsync, selectLoading, selectUser } from '../store/stateSlice';
 
 export default function Inicio() {
 
   const [authData, setAuthData] = useState({email: '', password: ''})
+  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const user = useSelector(selectUser);
 
   const handleOnChange = e => {
     setAuthData({
@@ -14,7 +19,7 @@ export default function Inicio() {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-
+    dispatch(appStateAsync(authData));
   }
 
   return (
@@ -23,6 +28,7 @@ export default function Inicio() {
         {/* <Link to="/soporte">
             <button>Ayuda</button>
         </Link> */}
+        {user.name === '' && 
       <form onSubmit={handleOnSubmit}>
         <div className="row">
           <div className="col-100">
@@ -43,10 +49,10 @@ export default function Inicio() {
           </div>
         </div>
         <div className="row end">
-          <button type='submit'>Enviar</button>
+          {loading ? <button disabled>Espere...</button> : <button type='submit'>Enviar</button>}
         </div>
       </form>
-
+      }
     </div>
   )
 }
